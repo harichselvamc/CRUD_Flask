@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Book Library</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Action</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>{{ book[3] }}</td>
+            <td>
+                <a href="{{ url_for('edit', id=book[0]) }}">Edit</a>
+                <a href="{{ url_for('delete', id=book[0]) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Add a Book</h2>
+    <form action="{{ url_for('add') }}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+        <button type="submit">Add Book</button>
+    </form>
+</body>
+</html>
